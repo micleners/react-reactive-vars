@@ -1,8 +1,9 @@
 import { useFormikContext } from 'formik';
 import React from 'react';
+import { Character } from '../context/useCharacterContext';
 
 export default function AbilityInput({ name }) {
-  const { values, handleChange } = useFormikContext();
+  const { values, handleChange } = useFormikContext<Character>();
   return (
     <React.Fragment>
       <h3>{name}</h3>

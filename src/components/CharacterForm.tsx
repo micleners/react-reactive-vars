@@ -20,8 +20,8 @@ const CharacterForm = () => {
       >
         {({ values, handleChange, handleSubmit }) => (
           <StyledForm onSubmit={handleSubmit}>
-            <AttributeInputs values={values} handleChange={handleChange} />
-            <AbilityInputs values={values} handleChange={handleChange} />
+            <AttributeInputs />
+            <AbilityInputs />
             <button type="submit">Submit</button>
           </StyledForm>
         )}
