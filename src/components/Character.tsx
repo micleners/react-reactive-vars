@@ -6,22 +6,6 @@ import { makeVar, useReactiveVar } from '@apollo/client';
 export default function Character() {
   const [_, __, character, setCharacter] = useCharacter();
 
-  console.log(character);
-  setCharacter({
-    name: 'apples',
-    player: '',
-    background: '',
-    race: '',
-    alignment: '',
-    str: '',
-    dex: '',
-    con: '',
-    int: '',
-    wis: '',
-    cha: '',
-  });
-  console.log(character);
-
   return (
     <StyledCharacter>
       {character &&
