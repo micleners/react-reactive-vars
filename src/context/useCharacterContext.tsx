@@ -1,7 +1,26 @@
 import React, { createContext, useContext, useState } from 'react';
 
-const CharacterContext =
-  createContext<[Character, React.Dispatch<React.SetStateAction<Character>>] | null>(null);
+import { makeVar, useReactiveVar } from '@apollo/client';
+
+const CharacterContext = createContext<
+  [Character, React.Dispatch<React.SetStateAction<Character>>] | null
+>(null);
+
+const newCharacter = {
+  name: '',
+  player: '',
+  background: '',
+  race: '',
+  alignment: '',
+  str: '',
+  dex: '',
+  con: '',
+  int: '',
+  wis: '',
+  cha: '',
+};
+
+export const reactiveChar = makeVar(newCharacter);
 
 export interface Character {
   name: string;
@@ -18,22 +37,14 @@ export interface Character {
 }
 
 export const CharacterProvider = (props) => {
-  const [character, setCharacter] = useState<Character>({
-    name: '',
-    player: '',
-    background: '',
-    race: '',
-    alignment: '',
-    str: '',
-    dex: '',
-    con: '',
-    int: '',
-    wis: '',
-    cha: '',
-  });
+  const [character, setCharacter] = useState<Character>(newCharacter);
+  const character2 = useReactiveVar(reactiveChar);
 
   return (
-    <CharacterContext.Provider value={[character, setCharacter]} {...props} />
+    <CharacterContext.Provider
+      value={[character, setCharacter, character2, reactiveChar]}
+      {...props}
+    />
   );
 };
 

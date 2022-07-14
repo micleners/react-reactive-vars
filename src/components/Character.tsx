@@ -1,9 +1,27 @@
 import React from 'react';
-import { useCharacter } from '../context/useCharacterContext';
+import { isDarkModeVar, useCharacter } from '../context/useCharacterContext';
 import { StyledCharacter, StyledCharacterRow } from './styled';
+import { makeVar, useReactiveVar } from '@apollo/client';
 
 export default function Character() {
-  const [character, setCharacter] = useCharacter();
+  const [_, __, character, setCharacter] = useCharacter();
+
+  console.log(character);
+  setCharacter({
+    name: 'apples',
+    player: '',
+    background: '',
+    race: '',
+    alignment: '',
+    str: '',
+    dex: '',
+    con: '',
+    int: '',
+    wis: '',
+    cha: '',
+  });
+  console.log(character);
+
   return (
     <StyledCharacter>
       {character &&
