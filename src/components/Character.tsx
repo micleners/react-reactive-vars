@@ -4,7 +4,7 @@ import { StyledCharacter, StyledCharacterRow } from './styled';
 import { makeVar, useReactiveVar } from '@apollo/client';
 
 export default function Character() {
-  const [_, __, character, setCharacter] = useCharacter();
+  const [character, setCharacter] = useCharacter();
 
   return (
     <StyledCharacter>

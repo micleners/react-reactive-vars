@@ -41,10 +41,7 @@ export const CharacterProvider = (props) => {
   const character2 = useReactiveVar(reactiveChar);
 
   return (
-    <CharacterContext.Provider
-      value={[character, setCharacter, character2, reactiveChar]}
-      {...props}
-    />
+    <CharacterContext.Provider value={[character2, reactiveChar]} {...props} />
   );
 };
 
