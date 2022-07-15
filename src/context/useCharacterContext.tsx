@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 
-import { makeVar, useReactiveVar } from '@apollo/client';
+import { makeVar, useReactiveVar, ReactiveVar } from '@apollo/client';
 
 const CharacterContext = createContext<
-  [Character, React.Dispatch<React.SetStateAction<Character>>] | null
+  [Character, ReactiveVar<Character>] | null
 >(null);
 
 const newCharacter = {
@@ -20,8 +20,6 @@ const newCharacter = {
   cha: '',
 };
 
-export const reactiveChar = makeVar(newCharacter);
-
 export interface Character {
   name: string;
   player: string;
@@ -37,19 +35,19 @@ export interface Character {
 }
 
 export const CharacterProvider = (props) => {
-  const [character, setCharacter] = useState<Character>(newCharacter);
-  const character2 = useReactiveVar(reactiveChar);
+  const setCharacter = makeVar(newCharacter);
+  const character = useReactiveVar(setCharacter);
 
   return (
-    <CharacterContext.Provider value={[character2, reactiveChar]} {...props} />
+    <CharacterContext.Provider value={[character, setCharacter]} {...props} />
   );
 };
 
 export const useCharacter = () => {
   const context =
-    useContext<[Character, React.Dispatch<React.SetStateAction<Character>>]>(
-      CharacterContext
-    );
+    useContext<
+      [Character, React.Dispatch<React.SetStateAction<Character>> | null]
+    >(CharacterContext);
 
   if (!context) {
     throw new Error('useCharacter must be used within the CharacterProvider');
